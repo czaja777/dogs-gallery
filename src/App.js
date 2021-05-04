@@ -5,7 +5,8 @@ import { SET_BREEDS_SUCCESS } from './rootReducer'
 import { selectListBreeds, selectLoading } from './selectors'
 import { useStyles } from './styles'
 import { SidebarListItem } from './components/SidebarListItem'
-import { quantitySkeletons } from './components/pluralSkeleton'
+import { SidebarSkeletons } from './components/pluralSkeleton'
+import { SidebarCollapsibleListItem } from './components/SidebarCollapsibleListItem'
 
 function App () {
   const classes = useStyles()
@@ -42,7 +43,7 @@ function App () {
         >
           <Divider />
           {loaded === false
-            ? quantitySkeletons()
+            ? <SidebarSkeletons />
             : (
                 listBreeds.map(breed => (
                   <List key={breed.name}>
