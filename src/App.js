@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Drawer, List, ListSubheader } from '@material-ui/core'
-import { SET_BREEDS_SUCCESS } from './rootReducer'
+import { SET_ACTIVE_BREED, SET_BREEDS_SUCCESS } from './rootReducer'
 import { selectListBreeds, selectLoading } from './selectors'
 import { useStyles } from './styles'
 import { SidebarListItem } from './components/SidebarListItem'
@@ -20,6 +20,10 @@ function App () {
 
   const listBreeds = useSelector(selectListBreeds)
   const loaded = useSelector(selectLoading)
+
+  const setActiveBreed = (breedName) => {
+    dispatch({ type: SET_ACTIVE_BREED, payload: breedName })
+  }
 
   return (
     <div className={classes.root}>
@@ -45,11 +49,26 @@ function App () {
           {loaded === false
             ? <SidebarSkeletons />
             : (
-                listBreeds.map(breed => (
-                  <List key={breed.name}>
-                    <SidebarListItem name={breed.name} subItems={breed.subBreeds} />
-                  </List>
-                ))
+                listBreeds.map(breed => {
+                  if (breed.subBreeds.length === 0) {
+                    return (
+                      <SidebarListItem
+                        key={breed.name}
+                        name={breed.name}
+                        onClick={setActiveBreed}
+                        padding={{ left: 0 }}
+                      />
+                    )
+                  }
+                  return (
+                    <SidebarCollapsibleListItem
+                      key={breed.name}
+                      name={breed.name}
+                      subItems={breed.subBreeds}
+                      onChildClick={setActiveBreed}
+                    />
+                  )
+                })
               )}
         </List>
       </Drawer>

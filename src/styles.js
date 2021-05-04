@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => {
     },
     drawerPaper: {
       width: drawerWidth
-    }
+    },
     // sidebar: {
     //     padding: theme.spacing(2),
     //     textAlign: 'center',
@@ -21,8 +21,8 @@ export const useStyles = makeStyles((theme) => {
     //     // maxWidth: 360,
     //     color: theme.palette.text.secondary,
     // },
-    // nested: {
-    //     paddingLeft: theme.spacing(4),
-    // },
+    nested: {
+      paddingLeft: theme.spacing(4)
+    }
   }
 })
