@@ -1,29 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Drawer, List, ListSubheader } from '@material-ui/core'
-import { SET_ACTIVE_BREED, SET_BREEDS_SUCCESS } from './rootReducer'
-import { selectListBreeds, selectLoading } from './selectors'
+import {
+  CHANGE_BREED_REQUEST,
+  CHANGE_BREED_SUCCESS,
+  SET_BREEDS_SUCCESS
+} from './rootReducer'
+import { selectListBreeds, selectLoading, selectBreedPictures, selectCachedPictures } from './selectors'
 import { useStyles } from './styles'
 import { SidebarListItem } from './components/SidebarListItem'
-import { SidebarSkeletons } from './components/pluralSkeleton'
+import { SidebarSkeletons } from './components/SidebarSkeletons'
 import { SidebarCollapsibleListItem } from './components/SidebarCollapsibleListItem'
+import { Gallery } from './components/Gallery'
+import { formatData, getCacheKey } from './utils'
+import { getListOfBreeds, getPicturesByBreed } from './dogApi'
 
 function App () {
   const classes = useStyles()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch('https://dog.ceo/api/breeds/list/all')
-      .then(res => res.json())
+    getListOfBreeds()
       .then(data => dispatch({ type: SET_BREEDS_SUCCESS, payload: data }))
   }, [])
 
   const listBreeds = useSelector(selectListBreeds)
   const loaded = useSelector(selectLoading)
+  const breedPictures = useSelector(selectBreedPictures)
+  const cachedPictures = useSelector(selectCachedPictures)
 
-  const setActiveBreed = (breedName) => {
-    dispatch({ type: SET_ACTIVE_BREED, payload: breedName })
-  }
+  const setActiveBreed = useCallback((nextActiveBreed) => {
+    dispatch({ type: CHANGE_BREED_REQUEST, payload: { breed: nextActiveBreed } })
+
+    const cacheKey = getCacheKey(nextActiveBreed)
+
+    if (cachedPictures[cacheKey]?.isLoaded !== true) {
+      getPicturesByBreed(nextActiveBreed)
+        .then(data => dispatch({
+          type: CHANGE_BREED_SUCCESS,
+          payload: {
+            breed: nextActiveBreed,
+            pictures: formatData(nextActiveBreed, data)
+          }
+        }))
+    }
+  }, [dispatch, cachedPictures])
 
   return (
     <div className={classes.root}>
@@ -73,7 +94,7 @@ function App () {
         </List>
       </Drawer>
       <main>
-        zdjęcia rasy lub komunikat
+        <Gallery pictures={breedPictures} />
       </main>
     </div>
   )
