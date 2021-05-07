@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/dogs-gallery/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/dogs-gallery/static/js/main.e2b34d2a.chunk.js",
+    "main.js.map": "/dogs-gallery/static/js/main.e2b34d2a.chunk.js.map",
+    "runtime-main.js": "/dogs-gallery/static/js/runtime-main.cdf7e213.js",
+    "runtime-main.js.map": "/dogs-gallery/static/js/runtime-main.cdf7e213.js.map",
+    "static/js/2.ad9518aa.chunk.js": "/dogs-gallery/static/js/2.ad9518aa.chunk.js",
+    "static/js/2.ad9518aa.chunk.js.map": "/dogs-gallery/static/js/2.ad9518aa.chunk.js.map",
+    "static/js/3.e2886098.chunk.js": "/dogs-gallery/static/js/3.e2886098.chunk.js",
+    "static/js/3.e2886098.chunk.js.map": "/dogs-gallery/static/js/3.e2886098.chunk.js.map",
+    "index.html": "/dogs-gallery/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/dogs-gallery/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.ad9518aa.chunk.js.LICENSE.txt": "/dogs-gallery/static/js/2.ad9518aa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cdf7e213.js",
+    "static/js/2.ad9518aa.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.e2b34d2a.chunk.js"
+  ]
+}
