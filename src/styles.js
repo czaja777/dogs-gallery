@@ -6,7 +6,11 @@ export const useStyles = makeStyles((theme) => {
   return {
     root: {
       display: 'flex',
-      color: theme.palette.text.secondary
+      color: theme.palette.text.secondary,
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper
     },
     drawer: {
       flexBasis: drawerWidth
@@ -23,6 +27,13 @@ export const useStyles = makeStyles((theme) => {
     // },
     nested: {
       paddingLeft: theme.spacing(4)
+    },
+    content: {
+      marginLeft: drawerWidth
+    },
+    gridList: {
+      // width: 500,
+      // height: 450
     }
   }
 })
