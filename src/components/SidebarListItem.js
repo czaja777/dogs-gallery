@@ -3,7 +3,10 @@ import { ListItem, ListItemText } from '@material-ui/core'
 
 export const SidebarListItem = (props) => {
   const handleClick = () => {
-    props.onClick(props.name)
+    props.onClick({
+      name: props.name,
+      parent: props.parent || null
+    })
   }
 
   return (

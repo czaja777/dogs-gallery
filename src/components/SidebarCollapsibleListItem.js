@@ -31,6 +31,7 @@ export const SidebarCollapsibleListItem = (props) => {
                   <SidebarListItem
                     key={sBreed}
                     name={sBreed}
+                    parent={props.name}
                     onClick={props.onChildClick}
                     className={classes.nested}
                   />
