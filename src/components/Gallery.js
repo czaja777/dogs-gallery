@@ -2,6 +2,7 @@ import React from 'react'
 import useSize from '@react-hook/size'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useStyles } from '../styles'
 
 const IMAGE_SIZE = 250
@@ -13,20 +14,18 @@ export const Gallery = (props) => {
 
   return (
     <div className={classes.content} ref={target}>
-      {/*<p> Wybierz z menu po lewej stronie interesującą Cię rasę </p> */}
-      <GridList cellHeight={IMAGE_SIZE} className={classes.gridList} cols={getNumberOfColumns(width)}>
+      <GridList cellHeight={IMAGE_SIZE} cols={getNumberOfColumns(width)}>
         {props.pictures.map(photo => (
           <GridListTile key={photo} cols={photo.cols || 1}>
-            <img src={photo} alt={photo.name} />
+            <LazyLoadImage
+              height={IMAGE_SIZE}
+              src={photo}
+              width='100%'
+              className={classes.tile}
+            />
           </GridListTile>
         ))}
       </GridList>
-      {/* <main> */}
-      {/*  <p> Wybierz z menu po lewej stronie interesującą Cię rasę </p> */}
-      {/*  {props.pictures.map(photo => { */}
-      {/*    return (<img src={photo} key={photo} />) */}
-      {/*  })} */}
-      {/* </main> */}
     </div>
   )
 }
@@ -37,6 +36,6 @@ const getNumberOfColumns = (width) => {
   } else if (width > 500 && width <= 800) {
     return 2
   } else {
-    return Math.floor(width/IMAGE_SIZE)
+    return Math.floor(width / IMAGE_SIZE)
   }
 }

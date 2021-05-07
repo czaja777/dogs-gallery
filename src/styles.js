@@ -18,22 +18,14 @@ export const useStyles = makeStyles((theme) => {
     drawerPaper: {
       width: drawerWidth
     },
-    // sidebar: {
-    //     padding: theme.spacing(2),
-    //     textAlign: 'center',
-    //     // width: '100%',
-    //     // maxWidth: 360,
-    //     color: theme.palette.text.secondary,
-    // },
     nested: {
       paddingLeft: theme.spacing(4)
     },
     content: {
       marginLeft: drawerWidth
     },
-    gridList: {
-      // width: 500,
-      // height: 450
+    tile: {
+      objectFit: 'cover'
     }
   }
 })
