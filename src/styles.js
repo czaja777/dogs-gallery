@@ -18,14 +18,29 @@ export const useStyles = makeStyles((theme) => {
     drawerPaper: {
       width: drawerWidth
     },
+    listTitle: {
+      background: theme.palette.background.paper
+    },
     nested: {
       paddingLeft: theme.spacing(4)
     },
     content: {
-      marginLeft: drawerWidth
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: drawerWidth
+      }
     },
     tile: {
       objectFit: 'cover'
+    },
+    menuButton: {
+      position: 'fixed',
+      left: 20,
+      top: 20,
+      zIndex: 1,
+      background: 'white',
+      '&:hover': {
+        background: 'white'
+      }
     }
   }
 })

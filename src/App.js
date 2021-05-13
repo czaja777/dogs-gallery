@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider, Drawer, List, ListSubheader } from '@material-ui/core'
+import { Divider, Drawer, IconButton, List, ListSubheader, useMediaQuery, useTheme } from '@material-ui/core'
+import { Menu as MenuIcon } from '@material-ui/icons'
 import { CHANGE_BREED_REQUEST, CHANGE_BREED_SUCCESS, SET_BREEDS_SUCCESS } from './rootReducer'
 import { selectListBreeds, selectLoading, selectBreedPictures, selectCachedPictures } from './selectors'
 import { useStyles } from './styles'
@@ -42,13 +43,19 @@ function App () {
     }
   }, [dispatch, cachedPictures])
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+
+  const theme = useTheme()
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'))
+
   return (
     <div className={classes.root}>
       <Drawer
         className={classes.drawer}
-        variant='persistent'
+        variant={isDesktop ? 'persistent' : 'temporary'}
         anchor='left'
-        open
+        open={isDesktop ? true : isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
         classes={{
           paper: classes.drawerPaper
         }}
@@ -57,7 +64,7 @@ function App () {
           component='nav'
           aria-labelledby='nested-list-subheader'
           subheader={
-            <ListSubheader component='div' id='nested-list-subheader'>
+            <ListSubheader className={classes.listTitle} component='div' id='nested-list-subheader'>
               Breeds list:
             </ListSubheader>
           }
@@ -89,7 +96,10 @@ function App () {
               )}
         </List>
       </Drawer>
-      <main>
+      <IconButton className={classes.menuButton} onClick={() => setIsSidebarOpen(true)}>
+        <MenuIcon />
+      </IconButton>
+      <main className={classes.content}>
         <Gallery pictures={breedPictures} />
       </main>
     </div>
