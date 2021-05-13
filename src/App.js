@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Drawer, List, ListSubheader } from '@material-ui/core'
-import {
-  CHANGE_BREED_REQUEST,
-  CHANGE_BREED_SUCCESS,
-  SET_BREEDS_SUCCESS
-} from './rootReducer'
+import { CHANGE_BREED_REQUEST, CHANGE_BREED_SUCCESS, SET_BREEDS_SUCCESS } from './rootReducer'
 import { selectListBreeds, selectLoading, selectBreedPictures, selectCachedPictures } from './selectors'
 import { useStyles } from './styles'
 import { SidebarListItem } from './components/SidebarListItem'
@@ -22,7 +18,7 @@ function App () {
   useEffect(() => {
     getListOfBreeds()
       .then(data => dispatch({ type: SET_BREEDS_SUCCESS, payload: data }))
-  }, [])
+  }, [dispatch])
 
   const listBreeds = useSelector(selectListBreeds)
   const loaded = useSelector(selectLoading)
