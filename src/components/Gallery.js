@@ -13,7 +13,7 @@ export const Gallery = (props) => {
   const classes = useStyles()
 
   return (
-    <div ref={target}>
+    <div ref={target} style={{ margin: '2px' }}>
       <GridList cellHeight={IMAGE_SIZE} cols={getNumberOfColumns(width)}>
         {props.pictures.map(photo => (
           <GridListTile key={photo} cols={photo.cols || 1}>

@@ -11,20 +11,16 @@ import { SidebarCollapsibleListItem } from './components/SidebarCollapsibleListI
 import { Gallery } from './components/Gallery'
 import { formatData, getCacheKey } from './utils'
 import { getListOfBreeds, getPicturesByBreed } from './dogApi'
+import { OnePhoto } from './components/OnePhoto'
 
 function App () {
   const classes = useStyles()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    getListOfBreeds()
-      .then(data => dispatch({ type: SET_BREEDS_SUCCESS, payload: data }))
-  }, [dispatch])
-
   const listBreeds = useSelector(selectListBreeds)
   const loaded = useSelector(selectLoading)
   const breedPictures = useSelector(selectBreedPictures)
   const cachedPictures = useSelector(selectCachedPictures)
+  const target = React.useRef(null)
 
   const setActiveBreed = useCallback((nextActiveBreed) => {
     dispatch({ type: CHANGE_BREED_REQUEST, payload: { breed: nextActiveBreed } })
@@ -42,6 +38,12 @@ function App () {
         }))
     }
   }, [dispatch, cachedPictures])
+
+  useEffect(() => {
+    getListOfBreeds()
+      .then(data => dispatch({ type: SET_BREEDS_SUCCESS, payload: data }))
+    setActiveBreed(null)
+  }, [dispatch])
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
@@ -99,8 +101,10 @@ function App () {
       <IconButton className={classes.menuButton} onClick={() => setIsSidebarOpen(true)}>
         <MenuIcon />
       </IconButton>
-      <main className={classes.content}>
-        <Gallery pictures={breedPictures} />
+      <main className={classes.content} ref={target}>
+        {breedPictures.length === 1
+          ? <OnePhoto pictures={breedPictures} />
+          : <Gallery pictures={breedPictures} />}
       </main>
     </div>
   )

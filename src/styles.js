@@ -4,13 +4,18 @@ const drawerWidth = 240
 
 export const useStyles = makeStyles((theme) => {
   return {
+    '@global': {
+      'html, body, #root': {
+        height: '100%'
+      }
+    },
     root: {
       display: 'flex',
       color: theme.palette.text.secondary,
       flexWrap: 'wrap',
       justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper
+      backgroundColor: theme.palette.background.paper,
+      height: '100%'
     },
     drawer: {
       flexBasis: drawerWidth
@@ -26,7 +31,8 @@ export const useStyles = makeStyles((theme) => {
     },
     content: {
       [theme.breakpoints.up('sm')]: {
-        marginLeft: drawerWidth
+        marginLeft: drawerWidth,
+        width: '100%'
       }
     },
     tile: {
