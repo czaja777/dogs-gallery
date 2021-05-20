@@ -9,8 +9,15 @@ export const SidebarListItem = (props) => {
     })
   }
 
+  const setFocus = (focusItem) => {
+    if (focusItem?.name === props.name) {
+      console.log(focusItem.name)
+      return true
+    }
+  }
+
   return (
-    <ListItem key={props.name} button onClick={handleClick} className={props.className}>
+    <ListItem key={props.name} button onClick={handleClick} className={props.className} selected={setFocus(props.focus)}>
       <ListItemText primary={props.name} />
     </ListItem>
   )
