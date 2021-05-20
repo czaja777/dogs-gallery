@@ -1,17 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider, Drawer, IconButton, List, ListSubheader, useMediaQuery, useTheme } from '@material-ui/core'
+import {
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListSubheader,
+  useMediaQuery,
+  useTheme
+} from '@material-ui/core'
 import { Menu as MenuIcon } from '@material-ui/icons'
 import { CHANGE_BREED_REQUEST, CHANGE_BREED_SUCCESS, SET_BREEDS_SUCCESS } from './rootReducer'
-import { selectListBreeds, selectLoading, selectBreedPictures, selectCachedPictures } from './selectors'
+import {
+  selectListBreeds,
+  selectLoading,
+  selectBreedPictures,
+  selectCachedPictures,
+  selectActiveBreed
+} from './selectors'
 import { useStyles } from './styles'
 import { SidebarListItem } from './components/SidebarListItem'
 import { SidebarSkeletons } from './components/SidebarSkeletons'
 import { SidebarCollapsibleListItem } from './components/SidebarCollapsibleListItem'
-import { Gallery } from './components/Gallery'
 import { formatData, getCacheKey } from './utils'
 import { getListOfBreeds, getPicturesByBreed } from './dogApi'
-import { OnePhoto } from './components/OnePhoto'
+import { MainContent } from './components/MainContent'
 
 function App () {
   const classes = useStyles()
@@ -21,6 +34,7 @@ function App () {
   const breedPictures = useSelector(selectBreedPictures)
   const cachedPictures = useSelector(selectCachedPictures)
   const target = React.useRef(null)
+  const getActiveBreed = useSelector(selectActiveBreed)
 
   const setActiveBreed = useCallback((nextActiveBreed) => {
     dispatch({ type: CHANGE_BREED_REQUEST, payload: { breed: nextActiveBreed } })
@@ -83,6 +97,7 @@ function App () {
                         name={breed.name}
                         onClick={setActiveBreed}
                         padding={{ left: 0 }}
+                        focus={getActiveBreed}
                       />
                     )
                   }
@@ -98,14 +113,14 @@ function App () {
               )}
         </List>
       </Drawer>
+
+      <main className={classes.content} ref={target}>
+        <MainContent pictures={breedPictures} cachedPictures={cachedPictures} activeBreed={getActiveBreed} />
+      </main>
+
       <IconButton className={classes.menuButton} onClick={() => setIsSidebarOpen(true)}>
         <MenuIcon />
       </IconButton>
-      <main className={classes.content} ref={target}>
-        {breedPictures.length === 1
-          ? <OnePhoto pictures={breedPictures} />
-          : <Gallery pictures={breedPictures} />}
-      </main>
     </div>
   )
 }

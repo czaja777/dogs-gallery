@@ -14,7 +14,6 @@ const initialState = {
 }
 
 export const SET_BREEDS_SUCCESS = 'setBreedsSuccess'
-export const SET_ACTIVE_BREED = 'setActiveBreed'
 export const SET_PICTURES = 'setPictures'
 export const CHANGE_BREED_REQUEST = 'changeBreedRequest'
 export const CHANGE_BREED_SUCCESS = 'changeBreedSuccess'
@@ -33,11 +32,6 @@ export function rootReducer (state = initialState, action) {
           }
         }),
         isLoaded: true
-      }
-    case SET_ACTIVE_BREED:
-      return {
-        ...state,
-        activeBreed: action.payload
       }
     case CHANGE_BREED_REQUEST:
       cacheKey = getCacheKey(action.payload.breed)

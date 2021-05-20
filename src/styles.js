@@ -12,8 +12,6 @@ export const useStyles = makeStyles((theme) => {
     root: {
       display: 'flex',
       color: theme.palette.text.secondary,
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
       backgroundColor: theme.palette.background.paper,
       height: '100%'
     },
@@ -30,15 +28,23 @@ export const useStyles = makeStyles((theme) => {
       paddingLeft: theme.spacing(4)
     },
     content: {
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: drawerWidth,
-        width: '100%'
-      }
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'column',
+      alignContent: 'center',
+      justifyContent: 'center'
     },
     tile: {
       objectFit: 'cover'
     },
+    photo: {
+      maxWidth: '100%',
+      maxHeight: '100%'
+    },
     menuButton: {
+      [theme.breakpoints.up('sm')]: {
+        display: 'none'
+      },
       position: 'fixed',
       left: 20,
       top: 20,
