@@ -34,6 +34,7 @@ export const SidebarCollapsibleListItem = (props) => {
                     parent={props.name}
                     onClick={props.onChildClick}
                     className={classes.nested}
+                    focus={props.focus}
                   />
                 )
               })}

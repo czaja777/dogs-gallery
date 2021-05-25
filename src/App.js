@@ -106,6 +106,7 @@ function App () {
                       name={breed.name}
                       subItems={breed.subBreeds}
                       onChildClick={setActiveBreed}
+                      focus={getActiveBreed}
                     />
                   )
                 })
