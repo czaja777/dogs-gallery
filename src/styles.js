@@ -27,11 +27,14 @@ export const useStyles = makeStyles((theme) => {
     nested: {
       paddingLeft: theme.spacing(4)
     },
-    content: {
+    main: {
       display: 'flex',
       flex: 1,
       flexDirection: 'column',
-      alignContent: 'center',
+      alignContent: 'center'
+      // justifyContent: 'center'
+    },
+    mainCenter: {
       justifyContent: 'center'
     },
     tile: {

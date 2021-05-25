@@ -33,7 +33,6 @@ function App () {
   const loaded = useSelector(selectLoading)
   const breedPictures = useSelector(selectBreedPictures)
   const cachedPictures = useSelector(selectCachedPictures)
-  const target = React.useRef(null)
   const getActiveBreed = useSelector(selectActiveBreed)
 
   const setActiveBreed = useCallback((nextActiveBreed) => {
@@ -114,9 +113,7 @@ function App () {
         </List>
       </Drawer>
 
-      <main className={classes.content} ref={target}>
-        <MainContent pictures={breedPictures} cachedPictures={cachedPictures} activeBreed={getActiveBreed} />
-      </main>
+      <MainContent pictures={breedPictures} cachedPictures={cachedPictures} activeBreed={getActiveBreed} />
 
       <IconButton className={classes.menuButton} onClick={() => setIsSidebarOpen(true)}>
         <MenuIcon />
